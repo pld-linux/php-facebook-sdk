@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	tests		# build with tests
+
 %define		php_min_version 5.2.0
 %include	/usr/lib/rpm/macros.php
 Summary:	PHP SDK for the Facebook API
@@ -11,6 +15,7 @@ Source0:	http://github.com/facebook/php-sdk/tarball/v%{version}#/%{name}-%{versi
 URL:		http://github.com/facebook/php-sdk/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
+%{?with_tests:BuildRequires:	php-PHPUnit >= 3.4}
 Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-curl
 Requires:	php-hash
@@ -33,6 +38,11 @@ friends can find them.
 %prep
 %setup -qc
 mv facebook-php-sdk-*/* .
+
+%build
+%if %{with tests}
+phpunit --colors --verbose --bootstrap src/facebook.php tests/tests.php
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
