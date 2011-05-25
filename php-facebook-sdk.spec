@@ -15,7 +15,13 @@ Source0:	http://github.com/facebook/php-sdk/tarball/v%{version}#/%{name}-%{versi
 URL:		http://github.com/facebook/php-sdk/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
-%{?with_tests:BuildRequires:	php-PHPUnit >= 3.4}
+%if %{with tests}
+BuildRequires:	php-PHPUnit >= 3.4
+BuildRequires:	php-curl
+BuildRequires:	php-hash
+BuildRequires:	php-json
+BuildRequires:	php-session
+%endif
 Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-curl
 Requires:	php-hash
@@ -28,12 +34,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautoreq	%{?_noautophpreq} %{?_noautopear}
 
 %description
-Facebook Athenaeum provides libraries an easy to implement Facebook
-application to extend library resources to students in Facebook. The
-application is easily customized for your institution and includes an
-integrated RSS reader, search tools, and a friend locator that allows
-Facebook users to record their location in the library so their
-friends can find them.
+Open Source PHP SDK that allows you to utilize the The Facebook
+Platform which is a set of APIs that make your application more
+social.
 
 %prep
 %setup -qc
