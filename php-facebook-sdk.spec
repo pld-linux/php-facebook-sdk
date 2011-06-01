@@ -16,7 +16,7 @@ URL:		http://github.com/facebook/php-sdk/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
 %if %{with tests}
-BuildRequires:	php-PHPUnit >= 3.4
+BuildRequires:	php-PHPUnit >= 3.5
 BuildRequires:	php-curl
 BuildRequires:	php-hash
 BuildRequires:	php-json
@@ -44,7 +44,7 @@ mv facebook-php-sdk-*/* .
 
 %build
 %if %{with tests}
-phpunit --colors --verbose --bootstrap src/facebook.php tests/tests.php
+phpunit --colors --coverage-html coverage --verbose --stderr --bootstrap tests/bootstrap.php tests/tests.php
 %endif
 
 %install
