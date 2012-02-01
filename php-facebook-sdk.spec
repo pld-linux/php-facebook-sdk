@@ -10,17 +10,17 @@ Version:	3.1.1
 Release:	1
 License:	Apache v2.0
 Group:		Development/Languages/PHP
-Source0:	http://github.com/facebook/php-sdk/tarball/v%{version}#/%{name}-%{version}.tgz
-# Source0-md5:	70229797aa73f4a2bad1447c6cab45b4
-URL:		http://github.com/facebook/php-sdk/
+Source0:	https://github.com/facebook/facebook-php-sdk/tarball/v%{version}#/%{name}-%{version}.tgz
+# Source0-md5:	3e23cbda87e68f95f3b222cbb868e5d1
+URL:		https://github.com/facebook/facebook-php-sdk
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
 %if %{with tests}
 BuildRequires:	php-PHPUnit >= 3.5
 BuildRequires:	php-curl
-BuildRequires:	php-pecl-xdebug
 BuildRequires:	php-hash
 BuildRequires:	php-json
+BuildRequires:	php-pecl-xdebug
 BuildRequires:	php-session
 %endif
 Requires:	php-common >= 4:%{php_min_version}
@@ -41,7 +41,7 @@ social.
 
 %prep
 %setup -qc
-mv facebook-php-sdk-*/* .
+mv facebook-facebook-php-sdk-*/* .
 
 %build
 %if %{with tests}
