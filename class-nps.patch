@@ -1,0 +1,70 @@
+Add FacebookNPS class that allows to use Facebook SDK without initializing php
+session storage.
+
+This makes api calls possible, but no login support for users.
+
+--- php-facebook-sdk-3.1.1/src/facebook.php	2011-08-09 03:32:07.000000000 +0300
++++ php-facebook-sdk-3.1.1/src/facebook.nps.php	2012-08-21 19:00:15.841768544 +0300
+@@ -19,29 +19,16 @@
+ 
+ /**
+  * Extends the BaseFacebook class with the intent of using
+- * PHP sessions to store user ids and access tokens.
++ * internal class storage for persistant data. Limited functionality!
+  */
+-class Facebook extends BaseFacebook
++class FacebookNPS extends BaseFacebook
+ {
+-  /**
+-   * Identical to the parent constructor, except that
+-   * we start a PHP session to store the user ID and
+-   * access token if during the course of execution
+-   * we discover them.
+-   *
+-   * @param Array $config the application configuration.
+-   * @see BaseFacebook::__construct in facebook.php
+-   */
+-  public function __construct($config) {
+-    if (!session_id()) {
+-      session_start();
+-    }
+-    parent::__construct($config);
+-  }
+ 
+   protected static $kSupportedKeys =
+     array('state', 'code', 'access_token', 'user_id');
+ 
++  protected $kPersistantData = array();
++
+   /**
+    * Provides the implementations of the inherited abstract
+    * methods.  The implementation uses PHP sessions to maintain
+@@ -55,7 +42,7 @@
+     }
+ 
+     $session_var_name = $this->constructSessionVariableName($key);
+-    $_SESSION[$session_var_name] = $value;
++    $this->kPersistantData[$session_var_name] = $value;
+   }
+ 
+   protected function getPersistentData($key, $default = false) {
+@@ -65,8 +52,8 @@
+     }
+ 
+     $session_var_name = $this->constructSessionVariableName($key);
+-    return isset($_SESSION[$session_var_name]) ?
+-      $_SESSION[$session_var_name] : $default;
++    return isset($this->kPersistantData[$session_var_name]) ?
++      $this->kPersistantData[$session_var_name] : $default;
+   }
+ 
+   protected function clearPersistentData($key) {
+@@ -76,7 +63,7 @@
+     }
+ 
+     $session_var_name = $this->constructSessionVariableName($key);
+-    unset($_SESSION[$session_var_name]);
++    unset($this->kPersistantData[$session_var_name]);
+   }
+ 
+   protected function clearAllPersistentData() {
