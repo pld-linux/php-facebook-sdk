@@ -22,7 +22,7 @@ BuildRequires:	php-curl
 BuildRequires:	php-hash
 BuildRequires:	php-json
 BuildRequires:	php-pecl-xdebug
-BuildRequires:	php-session)
+BuildRequires:	php-session
 %endif
 Requires:	php(curl)
 Requires:	php(hash)
