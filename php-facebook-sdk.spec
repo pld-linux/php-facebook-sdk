@@ -7,7 +7,7 @@
 Summary:	PHP SDK for the Facebook API
 Name:		php-facebook-sdk
 Version:	3.1.1
-Release:	4
+Release:	5
 License:	Apache v2.0
 Group:		Development/Languages/PHP
 Source0:	https://github.com/facebook/facebook-php-sdk/tarball/v%{version}#/%{name}-%{version}.tgz
@@ -24,10 +24,10 @@ BuildRequires:	php-json
 BuildRequires:	php-pecl-xdebug
 BuildRequires:	php-session
 %endif
+Requires:	php(core) >= %{php_min_version}
 Requires:	php(curl)
 Requires:	php(hash)
 Requires:	php(json)
-Requires:	php-common >= 4:%{php_min_version}
 Suggests:	php(session)
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
