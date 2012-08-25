@@ -7,7 +7,7 @@
 Summary:	PHP SDK for the Facebook API
 Name:		php-facebook-sdk
 Version:	3.1.1
-Release:	5
+Release:	6
 License:	Apache v2.0
 Group:		Development/Languages/PHP
 Source0:	https://github.com/facebook/facebook-php-sdk/tarball/v%{version}#/%{name}-%{version}.tgz
@@ -54,7 +54,7 @@ phpunit --colors --coverage-html coverage --verbose --stderr --bootstrap tests/b
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{php_data_dir}
-cp -a src/*facebook.php $RPM_BUILD_ROOT%{php_data_dir}
+cp -a src/*facebook*.php $RPM_BUILD_ROOT%{php_data_dir}
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -66,5 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc readme.md changelog.md
 %{php_data_dir}/facebook.php
+%{php_data_dir}/facebook.nps.php
 %{php_data_dir}/base_facebook.php
 %{_examplesdir}/%{name}-%{version}

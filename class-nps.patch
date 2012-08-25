@@ -3,7 +3,7 @@ session storage.
 
 This makes api calls possible, but no login support for users.
 
---- php-facebook-sdk-3.1.1/src/facebook.php	2011-08-09 03:32:07.000000000 +0300
+--- php-facebook-sdk-3.1.1/src/facebook.nps.php	2011-08-09 03:32:07.000000000 +0300
 +++ php-facebook-sdk-3.1.1/src/facebook.nps.php	2012-08-21 19:00:15.841768544 +0300
 @@ -19,29 +19,16 @@
  
