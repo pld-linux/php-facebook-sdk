@@ -3,9 +3,9 @@ session storage.
 
 This makes api calls possible, but no login support for users.
 
---- php-facebook-sdk-3.1.1/src/facebook.nps.php	2011-08-09 03:32:07.000000000 +0300
-+++ php-facebook-sdk-3.1.1/src/facebook.nps.php	2012-08-21 19:00:15.841768544 +0300
-@@ -19,29 +19,16 @@
+--- php-facebook-sdk-3.2.0/src/facebook.nps.php~	2012-10-26 13:02:43.000000000 +0300
++++ php-facebook-sdk-3.2.0/src/facebook.nps.php	2012-10-26 13:05:14.019384949 +0300
+@@ -19,9 +19,9 @@
  
  /**
   * Extends the BaseFacebook class with the intent of using
@@ -15,30 +15,33 @@ This makes api calls possible, but no login support for users.
 -class Facebook extends BaseFacebook
 +class FacebookNPS extends BaseFacebook
  {
--  /**
+   const FBSS_COOKIE_NAME = 'fbss';
+ 
+@@ -32,12 +32,9 @@
+   // Stores the shared session ID if one is set.
+   protected $sharedSessionID;
+ 
++  protected $kPersistantData = array();
++
+   /**
 -   * Identical to the parent constructor, except that
 -   * we start a PHP session to store the user ID and
 -   * access token if during the course of execution
 -   * we discover them.
 -   *
--   * @param Array $config the application configuration.
--   * @see BaseFacebook::__construct in facebook.php
--   */
--  public function __construct($config) {
+    * @param Array $config the application configuration. Additionally
+    * accepts "sharedSession" as a boolean to turn on a secondary
+    * cookie for environments with a shared session (that is, your app
+@@ -45,9 +42,6 @@
+    * @see BaseFacebook::__construct in facebook.php
+    */
+   public function __construct($config) {
 -    if (!session_id()) {
 -      session_start();
 -    }
--    parent::__construct($config);
--  }
- 
-   protected static $kSupportedKeys =
-     array('state', 'code', 'access_token', 'user_id');
- 
-+  protected $kPersistantData = array();
-+
-   /**
-    * Provides the implementations of the inherited abstract
-    * methods.  The implementation uses PHP sessions to maintain
+     parent::__construct($config);
+     if (!empty($config['sharedSession'])) {
+       $this->initSharedSession();
 @@ -55,7 +42,7 @@
      }
  

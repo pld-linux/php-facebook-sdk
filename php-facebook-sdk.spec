@@ -6,12 +6,12 @@
 %include	/usr/lib/rpm/macros.php
 Summary:	PHP SDK for the Facebook API
 Name:		php-facebook-sdk
-Version:	3.1.1
-Release:	6
+Version:	3.2.0
+Release:	0.1
 License:	Apache v2.0
 Group:		Development/Languages/PHP
 Source0:	https://github.com/facebook/facebook-php-sdk/tarball/v%{version}#/%{name}-%{version}.tgz
-# Source0-md5:	3e23cbda87e68f95f3b222cbb868e5d1
+# Source0-md5:	7a2dd4ca5b388496c46993eca0c2d56e
 Patch0:		class-nps.patch
 URL:		https://github.com/facebook/facebook-php-sdk
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
