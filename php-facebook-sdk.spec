@@ -2,6 +2,10 @@
 # Conditional build:
 %bcond_without	tests		# build with tests
 
+%if "%(cat /etc/resolv.conf >/dev/null 2>/dev/null; echo $?)" != "0"
+%undefine	with_tests
+%endif
+
 %define		php_min_version 5.2.0
 %include	/usr/lib/rpm/macros.php
 Summary:	PHP SDK for the Facebook API
