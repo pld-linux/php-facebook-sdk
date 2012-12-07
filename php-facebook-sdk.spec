@@ -1,17 +1,17 @@
 #
 # Conditional build:
-%bcond_with	tests		# build with tests
+%bcond_without	tests		# build with tests
 
 %define		php_min_version 5.2.0
 %include	/usr/lib/rpm/macros.php
 Summary:	PHP SDK for the Facebook API
 Name:		php-facebook-sdk
-Version:	3.2.0
-Release:	0.1
+Version:	3.2.1
+Release:	1
 License:	Apache v2.0
 Group:		Development/Languages/PHP
-Source0:	https://github.com/facebook/facebook-php-sdk/tarball/v%{version}#/%{name}-%{version}.tgz
-# Source0-md5:	7a2dd4ca5b388496c46993eca0c2d56e
+Source0:	https://github.com/facebook/facebook-php-sdk/tarball/v%{version}/%{name}-%{version}.tgz
+# Source0-md5:	3eb7f2df0b2cd267f2e1c2f1349f86e4
 Patch0:		class-nps.patch
 URL:		https://github.com/facebook/facebook-php-sdk
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
@@ -23,6 +23,7 @@ BuildRequires:	php-hash
 BuildRequires:	php-json
 BuildRequires:	php-pecl-xdebug
 BuildRequires:	php-session
+BuildConflicts:	%{name}
 %endif
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(curl)
@@ -48,7 +49,15 @@ cp src/facebook.php src/facebook.nps.php
 
 %build
 %if %{with tests}
-phpunit --colors --coverage-html coverage --verbose --stderr --bootstrap tests/bootstrap.php tests/tests.php
+phpunit \
+	-d session.save_handler="files" \
+	-d session.save_path="$(pwd)" \
+	--colors \
+	--coverage-html coverage \
+	--verbose \
+	--stderr \
+	--bootstrap tests/bootstrap.php \
+	tests/tests.php
 %endif
 
 %install
