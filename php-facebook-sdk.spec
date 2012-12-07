@@ -23,7 +23,6 @@ BuildRequires:	php-hash
 BuildRequires:	php-json
 BuildRequires:	php-pecl-xdebug
 BuildRequires:	php-session
-BuildConflicts:	%{name}
 %endif
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(curl)
@@ -52,6 +51,7 @@ cp src/facebook.php src/facebook.nps.php
 phpunit \
 	-d session.save_handler="files" \
 	-d session.save_path="$(pwd)" \
+	-d include_path=".:$(pwd):%{php_pear_dir}" \
 	--colors \
 	--coverage-html coverage \
 	--verbose \
