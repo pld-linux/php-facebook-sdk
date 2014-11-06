@@ -10,23 +10,23 @@
 %include	/usr/lib/rpm/macros.php
 Summary:	PHP SDK for the Facebook API
 Name:		php-facebook-sdk
-Version:	3.2.1
-Release:	2
+Version:	3.2.3
+Release:	1
 License:	Apache v2.0
 Group:		Development/Languages/PHP
-Source0:	https://github.com/facebook/facebook-php-sdk/tarball/v%{version}/%{name}-%{version}.tgz
-# Source0-md5:	3eb7f2df0b2cd267f2e1c2f1349f86e4
+Source0:	https://github.com/facebookarchive/facebook-php-sdk/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	fc8edc0afea0cbe8e64b539f491f5a19
 Patch0:		class-nps.patch
-URL:		https://github.com/facebook/facebook-php-sdk
+URL:		https://github.com/facebookarchive/facebook-php-sdk
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.654
 %if %{with tests}
+BuildRequires:	%{php_name}-curl
+BuildRequires:	%{php_name}-hash
+BuildRequires:	%{php_name}-json
+BuildRequires:	%{php_name}-pecl-xdebug
+BuildRequires:	%{php_name}-session
 BuildRequires:	php-PHPUnit >= 3.5
-BuildRequires:	php-curl
-BuildRequires:	php-hash
-BuildRequires:	php-json
-BuildRequires:	php-pecl-xdebug
-BuildRequires:	php-session
 %endif
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(curl)
@@ -44,9 +44,8 @@ Platform which is a set of APIs that make your application more
 social.
 
 %prep
-%setup -qc
-mv facebook-facebook-php-sdk-*/* .
-cp src/facebook.php src/facebook.nps.php
+%setup -qn facebook-php-sdk-%{version}
+cp -p src/facebook.php src/facebook.nps.php
 %patch0 -p1
 
 %build

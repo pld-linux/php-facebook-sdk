@@ -3,8 +3,8 @@ session storage.
 
 This makes api calls possible, but no login support for users.
 
---- php-facebook-sdk-3.2.0/src/facebook.nps.php~	2012-10-26 13:02:43.000000000 +0300
-+++ php-facebook-sdk-3.2.0/src/facebook.nps.php	2012-10-26 13:05:14.019384949 +0300
+--- facebook-php-sdk-3.2.3/src/facebook.nps.php~	2014-11-06 15:12:36.356873506 +0200
++++ facebook-php-sdk-3.2.3/src/facebook.nps.php	2014-11-06 15:23:39.136857705 +0200
 @@ -19,9 +19,9 @@
  
  /**
@@ -62,12 +62,14 @@ This makes api calls possible, but no login support for users.
    }
  
    protected function clearPersistentData($key) {
-@@ -76,7 +63,7 @@
+@@ -131,8 +131,8 @@
      }
  
      $session_var_name = $this->constructSessionVariableName($key);
--    unset($_SESSION[$session_var_name]);
-+    unset($this->kPersistantData[$session_var_name]);
+-    if (isset($_SESSION[$session_var_name])) {
+-      unset($_SESSION[$session_var_name]);
++    if (isset($this->kPersistantData[$session_var_name])) {
++      unset($this->kPersistantData[$session_var_name]);
+     }
    }
  
-   protected function clearAllPersistentData() {
