@@ -1,4 +1,6 @@
 #
+# NOTE: This SDK is deprecated. Use v4 (not yet packaged in pld)
+
 # Conditional build:
 %bcond_without	tests		# build with tests
 
