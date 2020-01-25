@@ -9,7 +9,6 @@
 %endif
 
 %define		php_min_version 5.2.0
-%include	/usr/lib/rpm/macros.php
 Summary:	PHP SDK for the Facebook API
 Name:		php-facebook-sdk
 Version:	3.2.3
