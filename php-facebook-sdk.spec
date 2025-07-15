@@ -47,7 +47,7 @@ social.
 %prep
 %setup -qn facebook-php-sdk-%{version}
 cp -p src/facebook.php src/facebook.nps.php
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %if %{with tests}
