@@ -12,7 +12,7 @@
 Summary:	PHP SDK for the Facebook API
 Name:		php-facebook-sdk
 Version:	3.2.3
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Development/Languages/PHP
 Source0:	https://github.com/facebookarchive/facebook-php-sdk/archive/v%{version}/%{name}-%{version}.tar.gz
